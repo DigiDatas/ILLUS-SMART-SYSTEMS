@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Illus | Smart Systems Simplified</title>
+    <title>Illus | Premium Smart Systems Layout</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Base Styles */
+        /* Modern Dark Theme Variables */
         :root {
             --primary: #4F46E5;
             --primary-hover: #4338CA;
             --bg-dark: #0F172A;
             --text-light: #F8FAFC;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -29,18 +30,19 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Fixed Navigation */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 5%;
             background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .brand {
@@ -54,22 +56,23 @@
             color: var(--primary);
         }
 
-        /* Hero Section */
+        /* Hero Layout Container */
         .hero {
-            min-height: 100vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 8rem 20px 4rem 20px;
             background: radial-gradient(circle at center, #1E293B 0%, #0F172A 100%);
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
+            letter-spacing: -1px;
             background: linear-gradient(to right, #818CF8, #C084FC);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -77,30 +80,34 @@
 
         .hero p {
             font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
             color: #94A3B8;
         }
 
+        /* Interactive Trigger Button */
         .cta-button {
-            padding: 15px 30px;
+            padding: 16px 36px;
             font-size: 1.1rem;
             font-weight: 600;
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
         }
 
         .cta-button:hover {
             background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(79, 70, 229, 0.4.5);
         }
 
-        /* Features Section */
+        /* Technical Presentation Cards Grid */
         .features {
-            padding: 5rem 5%;
+            padding: 4rem 5%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
@@ -108,16 +115,17 @@
 
         .feature-card {
             background: var(--card-bg);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .feature-card h3 {
@@ -128,52 +136,79 @@
 
         .feature-card p {
             color: #94A3B8;
+            font-size: 0.95rem;
         }
 
-        /* Help Text */
+        /* Setup Prompt Explainer Section */
         .help-text {
             text-align: center;
-            margin: 3rem 0;
+            margin: 4rem 0 6rem 0;
             font-size: 1.2rem;
             color: #E2E8F0;
+            padding: 0 20px;
+        }
+
+        .help-text strong {
+            color: #818CF8;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Brand Section -->
     <nav>
         <div class="brand">Illus<span>.</span></div>
     </nav>
 
+    <!-- Hero Content Entry -->
     <section class="hero">
         <h1>Smart Living, Demystified.</h1>
-        <p>Discover the future of automation with our DALI, Zigbee, and Matter systems. Complex technology made incredibly simple for your home or business.</p>
-        <button class="cta-button" onclick="alert('Click the calling agent widget in the bottom right to talk to our expert!')">Talk to our AI Expert</button>
+        <p>Experience seamless architectural lighting ecosystems. From premium wired DALI networks to universal Matter integrations, we make automation crystal clear.</p>
+        
+        <!-- Button targets and opens the shadow-rooted widget automatically -->
+        <button class="cta-button" onclick="openAIAgent()">Talk to Ahmed Mamdooh</button>
     </section>
 
+    <!-- Technical Protocols Segment -->
     <section class="features">
         <div class="feature-card">
-            <h3>DALI Systems</h3>
-            <p>Professional-grade digital lighting control. We make setting up perfect commercial or high-end residential lighting effortless.</p>
+            <h3>DALI Wired Standard</h3>
+            <p>Architectural-grade lighting control handling up to 64 independent device addresses per line. Built for absolute wired stability in luxury estates and commercial spaces.</p>
         </div>
         <div class="feature-card">
-            <h3>Zigbee Networks</h3>
-            <p>Reliable, low-power wireless mesh networks for your smart home. Connect sensors, lights, and switches without overloading your Wi-Fi.</p>
+            <h3>Zigbee Wireless Mesh</h3>
+            <p>Self-healing wireless infrastructure perfect for smart home upgrades without tearing open walls. Highly reliable layout routing that completely protects home Wi-Fi bandwidth.</p>
         </div>
         <div class="feature-card">
-            <h3>Matter Standard</h3>
-            <p>The new universal language of smart homes. Buy any Matter device and know it will work seamlessly with your existing setup.</p>
+            <h3>Matter Universal Bridge</h3>
+            <p>The platform-agnostic standard providing encrypted interoperability natively across Apple Home, Google Home, and Amazon Alexa configurations simultaneously.</p>
         </div>
     </section>
 
     <div class="help-text">
-        <p>Have questions? Don't know where to start? <br><strong>Tap the phone icon in the bottom right to call our AI Assistant!</strong></p>
+        <p>Testing an enterprise layout? <br><strong>Click the floating phone widget in the corner to run a mock sales call scenario!</strong></p>
     </div>
 
-    <!-- ELEVENLABS CONVERSATIONAL AI WIDGET -->
-    <!-- Replace 'YOUR_AGENT_ID_HERE' with your actual Agent ID from the ElevenLabs Dashboard -->
-    <elevenlabs-convai agent-id="YOUR_AGENT_ID_HERE"></elevenlabs-convai>
-    <script src="https://elevenlabs.io/convai-widget/index.js"></script>
+    <!-- ELEVENLABS CONVERSATIONAL AI CUSTOM WIDGET -->
+    <elevenlabs-convai agent-id="agent_5601kx8waw4pfy885txncnjxfrgv"></elevenlabs-convai>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+    <!-- Script utility helper to open widget interface via main CTA button click -->
+    <script>
+        function openAIAgent() {
+            const widget = document.querySelector('elevenlabs-convai');
+            if (widget && widget.shadowRoot) {
+                // Find and simulate a click on the internal floating button inside the widget element container
+                const actionButton = widget.shadowRoot.querySelector('button') || widget.shadowRoot.querySelector('.elevenlabs-convai-trigger');
+                if (actionButton) {
+                    actionButton.click();
+                    return;
+                }
+            }
+            // Fallback message notice if the widget element shadow state isn't rendered or fully active yet
+            alert("Please tap directly on the floating conversation widget button showing at the side of your window page!");
+        }
+    </script>
 
 </body>
 </html>
