@@ -527,22 +527,7 @@
   .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;}
   a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--brand); outline-offset:2px;}
 
-  /* ---------- ELEVENLABS WIDGET SAFETY NET ---------- */
-  /* Keeps the call-agent bubble pinned inside the visible viewport on every
-     device, regardless of any stacking/overflow context the vendor script
-     sets up internally. */
-  elevenlabs-convai{
-    position:fixed !important;
-    right:16px !important;
-    bottom:16px !important;
-    left:auto !important;
-    top:auto !important;
-    max-width:calc(100vw - 32px);
-    z-index:2147483000 !important;
-  }
-  @media (max-width:480px){
-    elevenlabs-convai{ right:12px !important; bottom:12px !important; }
-  }
+  
 </style>
 </head>
 <body>
