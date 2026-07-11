@@ -46,6 +46,7 @@
 
   *,*::before,*::after{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  html, body{overflow-x:hidden; max-width:100%;}
   body{
     margin:0;
     background:var(--bg);
@@ -71,7 +72,11 @@
   p{margin:0;}
   button{font-family:inherit;}
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
-  @media (max-width:640px){ .wrap{padding:0 20px;} }
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+    .trust-label{white-space:normal; font-size:.72rem;}
+    .trust-row{gap:16px;}
+  }
 
   .eyebrow{
     font-family:'IBM Plex Mono',monospace;
@@ -115,10 +120,17 @@
   /* ---------- NAV ---------- */
   header.site{
     position:sticky; top:0; z-index:80;
+    border-bottom:1px solid var(--line);
+  }
+  /* The frosted-glass effect lives on a decorative layer instead of on
+     header.site directly: backdrop-filter/filter on an element creates a
+     new containing block for its position:fixed descendants, which would
+     otherwise trap the mobile nav drawer inside the 80px header box. */
+  header.site::before{
+    content:''; position:absolute; inset:0; z-index:-1;
     background:rgba(251,250,245,.86);
     backdrop-filter:blur(14px) saturate(140%);
     -webkit-backdrop-filter:blur(14px) saturate(140%);
-    border-bottom:1px solid var(--line);
   }
   .nav{
     display:flex; align-items:center; justify-content:space-between;
@@ -145,12 +157,21 @@
   .nav-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
   .nav-toggle svg{width:26px; height:26px;}
 
+  /* Wrapper is layout-neutral on desktop; only becomes a viewport-clipped
+     drawer mask on mobile, so the off-canvas nav never widens the page. */
+  .nav-drawer{display:contents;}
+
   @media (max-width:920px){
+    .nav-drawer{
+      display:block; position:fixed; inset:80px 0 0 0;
+      overflow:hidden; pointer-events:none; z-index:70;
+    }
     nav.links{
-      position:fixed; inset:80px 0 0 0; height:calc(100vh - 80px);
+      position:absolute; top:0; right:0; height:100%; width:min(340px,86vw);
       background:var(--bg); flex-direction:column; align-items:flex-start;
       padding:32px 28px; gap:6px; transform:translateX(100%);
-      transition:transform .3s ease; overflow-y:auto;
+      transition:transform .3s ease; overflow-y:auto; pointer-events:auto;
+      box-shadow:var(--shadow-m);
     }
     nav.links.open{transform:translateX(0);}
     nav.links a{width:100%; padding:14px 0; border-bottom:1px solid var(--line); font-size:1.05rem;}
@@ -315,6 +336,25 @@
     text-transform:uppercase; color:var(--ink-faint);
   }
   .cat-heading::after{content:''; flex:1; height:1px; background:var(--line);}
+
+  /* ---------- CATEGORY FILTER (keeps catalog height manageable) ---------- */
+  .cat-filter{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+  .cat-filter-btn{
+    padding:11px 20px; border-radius:999px; border:1px solid var(--line-strong); background:var(--surface);
+    font-size:.86rem; font-weight:600; color:var(--ink-soft); cursor:pointer; transition:all .15s ease;
+  }
+  .cat-filter-btn:hover:not(.active){border-color:var(--ink-faint); color:var(--ink);}
+  .cat-filter-count{
+    display:inline-flex; align-items:center; justify-content:center; min-width:20px; height:20px; padding:0 5px;
+    margin-left:8px; border-radius:999px; background:rgba(0,0,0,.08); font-size:.72rem; font-weight:700;
+  }
+  .cat-filter-btn.active .cat-filter-count{background:rgba(255,255,255,.28);}
+  [data-panel="dali"] .cat-filter-btn.active{background:var(--dali); border-color:var(--dali); color:#fff;}
+  [data-panel="zigbee"] .cat-filter-btn.active{background:var(--zigbee); border-color:var(--zigbee); color:#fff;}
+  [data-panel="matter"] .cat-filter-btn.active{background:var(--matter); border-color:var(--matter); color:#fff;}
+  .cat-block{display:none;}
+  .cat-block.active{display:block; animation:fadein .3s ease;}
+  .cat-block .cat-heading{margin-top:0;}
 
   .prod-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px;}
   .prod-card{
@@ -486,6 +526,23 @@
 
   .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;}
   a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--brand); outline-offset:2px;}
+
+  /* ---------- ELEVENLABS WIDGET SAFETY NET ---------- */
+  /* Keeps the call-agent bubble pinned inside the visible viewport on every
+     device, regardless of any stacking/overflow context the vendor script
+     sets up internally. */
+  elevenlabs-convai{
+    position:fixed !important;
+    right:16px !important;
+    bottom:16px !important;
+    left:auto !important;
+    top:auto !important;
+    max-width:calc(100vw - 32px);
+    z-index:2147483000 !important;
+  }
+  @media (max-width:480px){
+    elevenlabs-convai{ right:12px !important; bottom:12px !important; }
+  }
 </style>
 </head>
 <body>
@@ -502,14 +559,16 @@
       </svg>
       Illus <span class="sub">Illumination</span>
     </a>
-    <nav class="links" id="navLinks">
-      <a href="#ecosystems">Ecosystems</a>
-      <a href="#products">Products</a>
-      <a href="#matcher">Driver Matcher</a>
-      <a href="#compare">Compare</a>
-      <a href="#voice">Talk to an Engineer</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="nav-drawer" id="navDrawer">
+      <nav class="links" id="navLinks">
+        <a href="#ecosystems">Ecosystems</a>
+        <a href="#products">Products</a>
+        <a href="#matcher">Driver Matcher</a>
+        <a href="#compare">Compare</a>
+        <a href="#voice">Talk to an Engineer</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
     <div class="nav-cta">
       <a href="#matcher" class="btn btn-ghost btn-sm">Find your driver</a>
       <a href="tel:8001222230" class="btn btn-primary btn-sm">8001&nbsp;222230</a>
@@ -702,12 +761,23 @@
             <li><span class="k" style="background:var(--dali)"></span><div><b>Scene &amp; group control</b>Flexible lighting scenes and synchronized group operation</div></li>
           </ul>
         </div>
-        <div class="cat-heading">Drivers — for luminaires</div>
-        <div class="prod-grid" data-catalog="dali-lum"></div>
-        <div class="cat-heading">Drivers — for LED strip</div>
-        <div class="prod-grid" data-catalog="dali-strip"></div>
-        <div class="cat-heading">Control devices</div>
-        <div class="prod-grid" data-catalog="dali-ctrl"></div>
+        <div class="cat-filter" data-filter-group="dali">
+          <button type="button" class="cat-filter-btn active" data-cat="lum">Luminaire drivers</button>
+          <button type="button" class="cat-filter-btn" data-cat="strip">LED strip drivers</button>
+          <button type="button" class="cat-filter-btn" data-cat="ctrl">Control devices</button>
+        </div>
+        <div class="cat-block active" data-cat-block="lum">
+          <div class="cat-heading">Drivers — for luminaires</div>
+          <div class="prod-grid" data-catalog="dali-lum"></div>
+        </div>
+        <div class="cat-block" data-cat-block="strip">
+          <div class="cat-heading">Drivers — for LED strip</div>
+          <div class="prod-grid" data-catalog="dali-strip"></div>
+        </div>
+        <div class="cat-block" data-cat-block="ctrl">
+          <div class="cat-heading">Control devices</div>
+          <div class="prod-grid" data-catalog="dali-ctrl"></div>
+        </div>
       </div>
 
       <!-- ZIGBEE PANEL -->
@@ -725,10 +795,18 @@
             <li><span class="k" style="background:var(--zigbee)"></span><div><b>High compatibility</b>Works with major smart home systems via gateways</div></li>
           </ul>
         </div>
-        <div class="cat-heading">Drivers — for luminaires</div>
-        <div class="prod-grid" data-catalog="zigbee-lum"></div>
-        <div class="cat-heading">Drivers — for LED strip</div>
-        <div class="prod-grid" data-catalog="zigbee-strip"></div>
+        <div class="cat-filter" data-filter-group="zigbee">
+          <button type="button" class="cat-filter-btn active" data-cat="lum">Luminaire drivers</button>
+          <button type="button" class="cat-filter-btn" data-cat="strip">LED strip drivers</button>
+        </div>
+        <div class="cat-block active" data-cat-block="lum">
+          <div class="cat-heading">Drivers — for luminaires</div>
+          <div class="prod-grid" data-catalog="zigbee-lum"></div>
+        </div>
+        <div class="cat-block" data-cat-block="strip">
+          <div class="cat-heading">Drivers — for LED strip</div>
+          <div class="prod-grid" data-catalog="zigbee-strip"></div>
+        </div>
       </div>
 
       <!-- MATTER PANEL -->
@@ -746,10 +824,18 @@
             <li><span class="k" style="background:var(--matter)"></span><div><b>Automation ready</b>Supports scenes and scheduling</div></li>
           </ul>
         </div>
-        <div class="cat-heading">Driver — LED strip</div>
-        <div class="prod-grid" data-catalog="matter-strip"></div>
-        <div class="cat-heading">Devices used with Matter</div>
-        <div class="prod-grid" data-catalog="matter-ctrl"></div>
+        <div class="cat-filter" data-filter-group="matter">
+          <button type="button" class="cat-filter-btn active" data-cat="strip">LED strip driver</button>
+          <button type="button" class="cat-filter-btn" data-cat="ctrl">Devices used with Matter</button>
+        </div>
+        <div class="cat-block active" data-cat-block="strip">
+          <div class="cat-heading">Driver — LED strip</div>
+          <div class="prod-grid" data-catalog="matter-strip"></div>
+        </div>
+        <div class="cat-block" data-cat-block="ctrl">
+          <div class="cat-heading">Devices used with Matter</div>
+          <div class="prod-grid" data-catalog="matter-ctrl"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1055,6 +1141,36 @@
     var el = document.querySelector('[data-catalog="'+key+'"]');
     if(!el) return;
     el.innerHTML = CATALOG[key].map(renderCard).join('');
+  });
+
+  // ---------- PRODUCT CATEGORY FILTERS (keeps each tab short & scannable) ----------
+  document.querySelectorAll('.cat-filter').forEach(function(group){
+    var eco = group.getAttribute('data-filter-group');
+    var panel = group.closest('.tabpanel');
+    var btns = group.querySelectorAll('.cat-filter-btn');
+
+    // annotate each button with a live item count from the catalog
+    btns.forEach(function(btn){
+      var cat = btn.getAttribute('data-cat');
+      var list = CATALOG[eco+'-'+cat];
+      if(list){
+        var count = document.createElement('span');
+        count.className = 'cat-filter-count';
+        count.textContent = list.length;
+        btn.appendChild(count);
+      }
+    });
+
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        btns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var cat = btn.getAttribute('data-cat');
+        panel.querySelectorAll('.cat-block').forEach(function(block){
+          block.classList.toggle('active', block.getAttribute('data-cat-block') === cat);
+        });
+      });
+    });
   });
 
   // ---------- TABS ----------
