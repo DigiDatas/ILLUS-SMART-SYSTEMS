@@ -1,214 +1,1186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Illus | Premium Smart Systems Layout</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        /* Modern Dark Theme Variables */
-        :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --bg-dark: #0F172A;
-            --text-light: #F8FAFC;
-            --card-bg: rgba(255, 255, 255, 0.04);
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Illus — Smart Lighting Ecosystems | DALI · Zigbee · Matter</title>
+<meta name="description" content="Illus engineers DALI, Zigbee and Matter lighting drivers and control devices. Find the right driver for your luminaire, compare ecosystems, and talk to a lighting engineer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,440;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBFAF5;
+    --bg-alt:#EFF5EF;
+    --surface:#FFFFFF;
+    --ink:#1B2621;
+    --ink-soft:#54625A;
+    --ink-faint:#8B978E;
+    --line:#E2E8DE;
+    --line-strong:#CBD6C6;
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+    --brand:#2E6B4C;
+    --brand-dark:#1F4C36;
+    --brand-light:#BFE3C9;
+    --brand-pale:#E7F3E9;
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    --dali:#2E6B4C;
+    --dali-bg:#E7F3E9;
+    --dali-line:#BEDCC6;
 
-        /* Fixed Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-color);
-        }
+    --zigbee:#AD7A28;
+    --zigbee-bg:#F6EEDC;
+    --zigbee-line:#E7D6AE;
 
-        .brand {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: white;
-        }
+    --matter:#3F6690;
+    --matter-bg:#E7EEF6;
+    --matter-line:#C8D7E8;
 
-        .brand span {
-            color: var(--primary);
-        }
+    --radius-s:10px;
+    --radius-m:16px;
+    --radius-l:26px;
+    --shadow-s:0 8px 24px -14px rgba(20,30,24,.22);
+    --shadow-m:0 24px 60px -28px rgba(20,30,24,.30);
+    --maxw:1220px;
+  }
 
-        /* Hero Layout Container */
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 20px 4rem 20px;
-            background: radial-gradient(circle at center, #1E293B 0%, #0F172A 100%);
-        }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  p{margin:0;}
+  button{font-family:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-            background: linear-gradient(to right, #818CF8, #C084FC);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    font-weight:500;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--brand);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:16px; height:1px;
+    background:var(--brand);
+    display:inline-block;
+  }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 650px;
-            margin-bottom: 2.5rem;
-            color: #94A3B8;
-        }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 26px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:.95rem;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--brand); color:#fff; box-shadow:var(--shadow-s);}
+  .btn-primary:hover{background:var(--brand-dark); box-shadow:var(--shadow-m); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line-strong);}
+  .btn-ghost:hover{border-color:var(--brand); color:var(--brand); background:var(--brand-pale);}
+  .btn-sm{padding:10px 18px; font-size:.84rem;}
 
-        /* Interactive Trigger Button */
-        .cta-button {
-            padding: 16px 36px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
-            transition: all 0.3s ease;
-        }
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky; top:0; z-index:80;
+    background:rgba(251,250,245,.86);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    height:80px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.32rem;
+    letter-spacing:-.01em; text-decoration:none; color:var(--ink);
+  }
+  .logo .mark{width:30px; height:30px;}
+  .logo .sub{
+    font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:.62rem;
+    letter-spacing:.14em; color:var(--ink-faint); text-transform:uppercase;
+    margin-left:2px; margin-top:5px;
+  }
+  nav.links{display:flex; align-items:center; gap:34px;}
+  nav.links a{
+    font-size:.9rem; font-weight:500; text-decoration:none; color:var(--ink-soft);
+    transition:color .15s ease;
+  }
+  nav.links a:hover{color:var(--brand);}
+  .nav-cta{display:flex; align-items:center; gap:16px;}
+  .nav-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .nav-toggle svg{width:26px; height:26px;}
 
-        .cta-button:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(79, 70, 229, 0.4.5);
-        }
+  @media (max-width:920px){
+    nav.links{
+      position:fixed; inset:80px 0 0 0; height:calc(100vh - 80px);
+      background:var(--bg); flex-direction:column; align-items:flex-start;
+      padding:32px 28px; gap:6px; transform:translateX(100%);
+      transition:transform .3s ease; overflow-y:auto;
+    }
+    nav.links.open{transform:translateX(0);}
+    nav.links a{width:100%; padding:14px 0; border-bottom:1px solid var(--line); font-size:1.05rem;}
+    .nav-toggle{display:block;}
+    .nav-cta .btn-ghost{display:none;}
+  }
 
-        /* Technical Presentation Cards Grid */
-        .features {
-            padding: 4rem 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 40px;
+    position:relative; overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.35rem, 3.6vw + 1rem, 3.9rem);
+    line-height:1.06;
+    margin:22px 0 24px;
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--brand);
+  }
+  .hero p.lead{
+    font-size:1.1rem; color:var(--ink-soft); max-width:520px; margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:40px;}
+  .hero-stats{display:flex; gap:36px; flex-wrap:wrap;}
+  .hero-stats .stat b{
+    font-family:'Fraunces',serif; font-size:1.7rem; font-weight:600; display:block; color:var(--ink);
+  }
+  .hero-stats .stat span{font-size:.78rem; color:var(--ink-faint); letter-spacing:.02em;}
 
-        .feature-card {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(4px);
-            transition: all 0.3s ease;
-        }
+  .orbit-wrap{position:relative; aspect-ratio:1/1; max-width:520px; margin:0 auto;}
+  .orbit-wrap svg{width:100%; height:100%; overflow:visible;}
+  .orbit-ring{transform-origin:260px 260px; animation:spin 60s linear infinite;}
+  @keyframes spin{ to{ transform:rotate(360deg);} }
+  .orbit-pulse{animation:pulse 3.6s ease-in-out infinite;}
+  @keyframes pulse{ 0%,100%{opacity:.35;} 50%{opacity:.85;} }
+  .node-label{font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; letter-spacing:.03em;}
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.06);
-        }
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .orbit-wrap{max-width:380px;}
+  }
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
+  /* ---------- TRUST STRIP ---------- */
+  .trust{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:26px 0; background:var(--surface);
+  }
+  .trust-row{
+    display:flex; align-items:center; gap:40px; flex-wrap:wrap; justify-content:space-between;
+  }
+  .trust-label{font-size:.78rem; color:var(--ink-faint); font-weight:600; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap;}
+  .trust-badges{display:flex; gap:34px; flex-wrap:wrap; align-items:center;}
+  .badge{display:flex; align-items:center; gap:9px; font-weight:600; font-size:.92rem; color:var(--ink-soft);}
+  .badge svg{width:22px; height:22px; color:var(--brand);}
 
-        .feature-card p {
-            color: #94A3B8;
-            font-size: 0.95rem;
-        }
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:104px 0;}
+  @media (max-width:720px){ section{padding:68px 0;} }
+  .section-head{max-width:680px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(1.8rem, 1.6vw + 1.2rem, 2.7rem); margin:16px 0 14px;}
+  .section-head p{color:var(--ink-soft); font-size:1.04rem;}
+  .alt{background:var(--bg-alt);}
 
-        /* Setup Prompt Explainer Section */
-        .help-text {
-            text-align: center;
-            margin: 4rem 0 6rem 0;
-            font-size: 1.2rem;
-            color: #E2E8F0;
-            padding: 0 20px;
-        }
+  /* ---------- BENEFITS ---------- */
+  .benefit-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:var(--radius-l); overflow:hidden;
+  }
+  .benefit{
+    background:var(--surface); padding:38px 32px; display:flex; flex-direction:column; gap:14px;
+  }
+  .benefit .icon{
+    width:44px; height:44px; border-radius:12px; background:var(--brand-pale);
+    display:flex; align-items:center; justify-content:center; color:var(--brand);
+  }
+  .benefit .icon svg{width:22px; height:22px;}
+  .benefit h3{font-size:1.08rem; font-weight:600; font-family:'Inter',sans-serif;}
+  .benefit p{color:var(--ink-soft); font-size:.92rem;}
+  @media (max-width:900px){ .benefit-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .benefit-grid{grid-template-columns:1fr;} }
 
-        .help-text strong {
-            color: #818CF8;
-        }
-    </style>
+  /* ---------- ECOSYSTEM LANDSCAPE CARDS ---------- */
+  .eco-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:900px){ .eco-cards{grid-template-columns:1fr;} }
+  .eco-card{
+    border-radius:var(--radius-l); padding:36px 32px; border:1px solid;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .eco-card.dali{background:var(--dali-bg); border-color:var(--dali-line);}
+  .eco-card.zigbee{background:var(--zigbee-bg); border-color:var(--zigbee-line);}
+  .eco-card.matter{background:var(--matter-bg); border-color:var(--matter-line);}
+  .eco-tag{
+    align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.68rem; font-weight:600;
+    letter-spacing:.1em; text-transform:uppercase; padding:6px 12px; border-radius:999px; color:#fff;
+  }
+  .eco-card.dali .eco-tag{background:var(--dali);}
+  .eco-card.zigbee .eco-tag{background:var(--zigbee);}
+  .eco-card.matter .eco-tag{background:var(--matter);}
+  .eco-card h3{font-size:1.5rem;}
+  .eco-card .eco-sub{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--ink-soft); margin-top:-10px;}
+  .eco-card ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .eco-card li{
+    font-size:.92rem; color:var(--ink); padding-left:20px; position:relative;
+  }
+  .eco-card li::before{
+    content:''; position:absolute; left:0; top:9px; width:7px; height:7px; border-radius:50%;
+  }
+  .eco-card.dali li::before{background:var(--dali);}
+  .eco-card.zigbee li::before{background:var(--zigbee);}
+  .eco-card.matter li::before{background:var(--matter);}
+  .eco-card .go{
+    margin-top:8px; font-size:.86rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+  }
+  .eco-card.dali .go{color:var(--dali);}
+  .eco-card.zigbee .go{color:var(--zigbee);}
+  .eco-card.matter .go{color:var(--matter);}
+
+  /* ---------- TABS (deep dive) ---------- */
+  .tabbar{
+    display:flex; gap:10px; margin-bottom:44px; flex-wrap:wrap;
+    border-bottom:1px solid var(--line); padding-bottom:0;
+  }
+  .tabbtn{
+    padding:14px 22px; border-radius:12px 12px 0 0; border:1px solid transparent; border-bottom:none;
+    background:transparent; cursor:pointer; font-weight:600; font-size:.94rem; color:var(--ink-faint);
+    display:flex; align-items:center; gap:10px; transition:all .15s ease; position:relative; top:1px;
+  }
+  .tabbtn .dot{width:9px; height:9px; border-radius:50%; background:currentColor;}
+  .tabbtn[data-eco="dali"].active{color:var(--dali); background:var(--dali-bg); border-color:var(--dali-line); border-bottom-color:var(--dali-bg);}
+  .tabbtn[data-eco="zigbee"].active{color:var(--zigbee); background:var(--zigbee-bg); border-color:var(--zigbee-line); border-bottom-color:var(--zigbee-bg);}
+  .tabbtn[data-eco="matter"].active{color:var(--matter); background:var(--matter-bg); border-color:var(--matter-line); border-bottom-color:var(--matter-bg);}
+  .tabbtn:not(.active):hover{color:var(--ink);}
+
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block; animation:fadein .35s ease;}
+  @keyframes fadein{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .eco-overview{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:48px; margin-bottom:52px; align-items:start;
+  }
+  @media (max-width:880px){ .eco-overview{grid-template-columns:1fr;} }
+  .eco-overview .lede{font-size:1.06rem; color:var(--ink); margin-bottom:18px;}
+  .eco-overview .concept{font-size:.94rem; color:var(--ink-soft); margin-bottom:8px;}
+  .eco-overview .concept b{color:var(--ink);}
+  .feat-list{list-style:none; margin:0; padding:0; display:grid; gap:14px;}
+  .feat-list li{
+    display:flex; gap:12px; align-items:flex-start; font-size:.92rem; padding:16px 18px;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-s);
+  }
+  .feat-list b{display:block; font-size:.9rem; margin-bottom:2px;}
+  .feat-list span.k{
+    width:9px; height:9px; border-radius:50%; margin-top:6px; flex:none;
+  }
+
+  .cat-heading{
+    display:flex; align-items:center; gap:12px; margin:44px 0 20px;
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-faint);
+  }
+  .cat-heading::after{content:''; flex:1; height:1px; background:var(--line);}
+
+  .prod-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px;}
+  .prod-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-m);
+    padding:20px; transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+  }
+  .prod-card:hover{box-shadow:var(--shadow-s); transform:translateY(-2px);}
+  .prod-card .pc-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; gap:8px;}
+  .prod-card .pc-name{font-weight:700; font-size:.94rem; line-height:1.3;}
+  .prod-card .pc-code{
+    font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--ink-faint);
+    background:var(--bg-alt); padding:3px 8px; border-radius:6px; white-space:nowrap;
+  }
+  .prod-card .pc-specs{display:flex; flex-direction:column; gap:5px; margin-top:10px;}
+  .prod-card .pc-specs div{
+    display:flex; justify-content:space-between; font-size:.78rem; color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .prod-card .pc-specs div b{color:var(--ink); font-weight:500;}
+
+  /* ---------- MATCHER ---------- */
+  .matcher-shell{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-l);
+    box-shadow:var(--shadow-m); overflow:hidden;
+  }
+  .matcher-grid{display:grid; grid-template-columns:.85fr 1.15fr;}
+  @media (max-width:960px){ .matcher-grid{grid-template-columns:1fr;} }
+  .matcher-form{
+    padding:44px 40px; background:var(--brand-pale); border-right:1px solid var(--line);
+    display:flex; flex-direction:column; gap:26px;
+  }
+  @media (max-width:960px){ .matcher-form{border-right:none; border-bottom:1px solid var(--line);} }
+  .field label{display:block; font-size:.82rem; font-weight:600; margin-bottom:10px; color:var(--ink);}
+  .seg{display:flex; gap:8px; flex-wrap:wrap;}
+  .seg button{
+    padding:10px 16px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface);
+    font-size:.86rem; font-weight:600; cursor:pointer; color:var(--ink-soft); transition:all .15s ease;
+  }
+  .seg button.active{background:var(--brand); color:#fff; border-color:var(--brand);}
+  .num-field{
+    display:flex; align-items:center; border:1px solid var(--line-strong); border-radius:10px; overflow:hidden; background:var(--surface);
+  }
+  .num-field input{
+    border:none; outline:none; padding:13px 14px; font-size:1rem; width:100%; font-family:'IBM Plex Mono',monospace; background:transparent; color:var(--ink);
+  }
+  .num-field span{padding:0 16px; font-size:.82rem; color:var(--ink-faint); font-weight:600;}
+  .priority-list{display:flex; flex-direction:column; gap:10px;}
+  .priority-opt{
+    display:flex; gap:12px; align-items:flex-start; padding:13px 14px; border:1px solid var(--line-strong);
+    border-radius:10px; cursor:pointer; background:var(--surface); transition:all .15s ease;
+  }
+  .priority-opt.active{border-color:var(--brand); background:#fff; box-shadow:0 0 0 3px var(--brand-light);}
+  .priority-opt input{margin-top:3px;}
+  .priority-opt .p-title{font-size:.88rem; font-weight:700;}
+  .priority-opt .p-sub{font-size:.78rem; color:var(--ink-faint); margin-top:2px;}
+  .matcher-submit{margin-top:4px;}
+
+  .matcher-results{padding:44px 40px;}
+  .mr-empty{
+    height:100%; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:14px;
+    color:var(--ink-faint); min-height:320px;
+  }
+  .mr-empty svg{width:40px; height:40px; color:var(--brand-light);}
+  .mr-empty p{max-width:340px; font-size:.92rem;}
+  .result-card{
+    border:1px solid var(--line); border-radius:var(--radius-m); padding:22px 22px; margin-bottom:16px; position:relative;
+    border-left-width:4px;
+  }
+  .result-card.dali{border-left-color:var(--dali);}
+  .result-card.zigbee{border-left-color:var(--zigbee);}
+  .result-card.matter{border-left-color:var(--matter);}
+  .result-top{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;}
+  .result-eco{
+    font-family:'IBM Plex Mono',monospace; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 10px; border-radius:999px; color:#fff;
+  }
+  .result-card.dali .result-eco{background:var(--dali);}
+  .result-card.zigbee .result-eco{background:var(--zigbee);}
+  .result-card.matter .result-eco{background:var(--matter);}
+  .result-fit{font-size:.76rem; font-weight:600; color:var(--ink-faint);}
+  .result-name{font-weight:700; font-size:1.05rem; margin-bottom:2px;}
+  .result-code{font-family:'IBM Plex Mono',monospace; font-size:.76rem; color:var(--ink-faint); margin-bottom:14px;}
+  .result-specs{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-bottom:14px;}
+  .result-specs div{font-size:.78rem;}
+  .result-specs div b{display:block; color:var(--ink); font-family:'IBM Plex Mono',monospace; font-size:.86rem; margin-top:2px;}
+  .result-specs div span{color:var(--ink-faint);}
+  .result-pair{
+    font-size:.83rem; color:var(--ink-soft); border-top:1px dashed var(--line); padding-top:12px; display:flex; gap:8px;
+  }
+  .result-pair b{color:var(--ink); font-weight:600;}
+  .mr-note{font-size:.78rem; color:var(--ink-faint); margin-top:18px; line-height:1.55;}
+
+  /* ---------- COMPARISON TABLE ---------- */
+  .compare-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-l); background:var(--surface);}
+  table.compare{width:100%; border-collapse:collapse; min-width:720px;}
+  table.compare th, table.compare td{padding:18px 22px; text-align:left; font-size:.9rem; border-bottom:1px solid var(--line);}
+  table.compare thead th{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-faint); font-weight:600; background:var(--bg-alt);
+  }
+  table.compare thead th.h-eco{color:#fff;}
+  table.compare thead th.dali{background:var(--dali);}
+  table.compare thead th.zigbee{background:var(--zigbee);}
+  table.compare thead th.matter{background:var(--matter);}
+  table.compare tbody th{font-weight:600; color:var(--ink); background:var(--bg-alt); white-space:nowrap;}
+  table.compare tbody tr:last-child td, table.compare tbody tr:last-child th{border-bottom:none;}
+  table.compare td{color:var(--ink-soft);}
+
+  /* ---------- VOICE SECTION ---------- */
+  .voice-card{
+    background:linear-gradient(155deg,var(--brand-dark),var(--brand) 65%);
+    border-radius:var(--radius-l); padding:56px; color:#fff; position:relative; overflow:hidden;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
+  }
+  @media (max-width:880px){ .voice-card{grid-template-columns:1fr; padding:40px 28px;} }
+  .voice-card::before{
+    content:''; position:absolute; width:520px; height:520px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,.10), transparent 70%);
+    top:-220px; right:-160px;
+  }
+  .voice-eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--brand-light); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .pulse-dot{width:8px; height:8px; border-radius:50%; background:#7BE0A0; animation:pulse 1.8s ease-in-out infinite;}
+  .voice-card h2{color:#fff; font-size:clamp(1.7rem,1.6vw + 1rem,2.4rem); margin-bottom:16px;}
+  .voice-card p{color:rgba(255,255,255,.82); font-size:1rem; max-width:460px; margin-bottom:26px;}
+  .voice-meta{display:flex; gap:26px; flex-wrap:wrap; margin-bottom:8px;}
+  .voice-meta div b{display:block; font-family:'Fraunces',serif; font-size:1.2rem;}
+  .voice-meta div span{font-size:.76rem; color:rgba(255,255,255,.68);}
+  .voice-panel{
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:var(--radius-m);
+    padding:28px; backdrop-filter:blur(6px); position:relative; z-index:1;
+  }
+  .voice-panel .agent-row{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .agent-avatar{
+    width:52px; height:52px; border-radius:50%; background:#fff; color:var(--brand);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:600; font-size:1.2rem; flex:none;
+  }
+  .voice-panel .agent-name{font-weight:700; font-size:1rem;}
+  .voice-panel .agent-role{font-size:.78rem; color:rgba(255,255,255,.7);}
+  .voice-hint{font-size:.82rem; color:rgba(255,255,255,.75); line-height:1.6;}
+  .voice-hint b{color:#fff;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--brand-dark); color:rgba(255,255,255,.86); padding-top:80px;}
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:40px; padding-bottom:56px; border-bottom:1px solid rgba(255,255,255,.14);
+  }
+  @media (max-width:820px){ .footer-grid{grid-template-columns:1fr 1fr; row-gap:36px;} }
+  @media (max-width:520px){ .footer-grid{grid-template-columns:1fr;} }
+  .footer-brand .logo{color:#fff;}
+  .footer-brand p{color:rgba(255,255,255,.65); font-size:.88rem; margin:16px 0 22px; max-width:280px;}
+  .footer-social{display:flex; gap:10px;}
+  .footer-social a{
+    width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.24);
+    display:flex; align-items:center; justify-content:center; text-decoration:none; transition:all .15s ease;
+  }
+  .footer-social a:hover{background:#fff; color:var(--brand-dark);}
+  .footer-social svg{width:16px; height:16px;}
+  footer h4{color:#fff; font-family:'Inter',sans-serif; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; font-weight:700; margin-bottom:18px;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
+  footer a{color:rgba(255,255,255,.7); text-decoration:none; font-size:.9rem; transition:color .15s ease;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding:26px 0; flex-wrap:wrap; gap:12px;
+    color:rgba(255,255,255,.55); font-size:.8rem;
+  }
+
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;}
+  a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--brand); outline-offset:2px;}
+</style>
 </head>
 <body>
 
-    <!-- Header Brand Section -->
-    <nav>
-        <div class="brand">Illus<span>.</span></div>
+<header class="site">
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <svg class="mark" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="15" stroke="#2E6B4C" stroke-width="1.6"/>
+        <circle cx="16" cy="16" r="4.6" fill="#2E6B4C"/>
+        <circle cx="16" cy="4.5" r="2.3" fill="#2E6B4C"/>
+        <circle cx="26.5" cy="21.7" r="2.3" fill="#AD7A28"/>
+        <circle cx="5.5" cy="21.7" r="2.3" fill="#3F6690"/>
+      </svg>
+      Illus <span class="sub">Illumination</span>
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#ecosystems">Ecosystems</a>
+      <a href="#products">Products</a>
+      <a href="#matcher">Driver Matcher</a>
+      <a href="#compare">Compare</a>
+      <a href="#voice">Talk to an Engineer</a>
+      <a href="#contact">Contact</a>
     </nav>
-
-    <!-- Hero Content Entry -->
-    <section class="hero">
-        <h1>Smart Living, Demystified.</h1>
-        <p>Experience seamless architectural lighting ecosystems. From premium wired DALI networks to universal Matter integrations, we make automation crystal clear.</p>
-        
-        <!-- Button targets and opens the shadow-rooted widget automatically -->
-        <button class="cta-button" onclick="openAIAgent()">Talk to Ahmed Mamdooh</button>
-    </section>
-
-    <!-- Technical Protocols Segment -->
-    <section class="features">
-        <div class="feature-card">
-            <h3>DALI Wired Standard</h3>
-            <p>Architectural-grade lighting control handling up to 64 independent device addresses per line. Built for absolute wired stability in luxury estates and commercial spaces.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Zigbee Wireless Mesh</h3>
-            <p>Self-healing wireless infrastructure perfect for smart home upgrades without tearing open walls. Highly reliable layout routing that completely protects home Wi-Fi bandwidth.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Matter Universal Bridge</h3>
-            <p>The platform-agnostic standard providing encrypted interoperability natively across Apple Home, Google Home, and Amazon Alexa configurations simultaneously.</p>
-        </div>
-    </section>
-
-    <div class="help-text">
-        <p>Testing an enterprise layout? <br><strong>Click the floating phone widget in the corner to run a mock sales call scenario!</strong></p>
+    <div class="nav-cta">
+      <a href="#matcher" class="btn btn-ghost btn-sm">Find your driver</a>
+      <a href="tel:8001222230" class="btn btn-primary btn-sm">8001&nbsp;222230</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
+  </div>
+</header>
 
-    <!-- ELEVENLABS CONVERSATIONAL AI CUSTOM WIDGET -->
-    <elevenlabs-convai agent-id="agent_5601kx8waw4pfy885txncnjxfrgv"></elevenlabs-convai>
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<main id="top">
 
-    <!-- Script utility helper to open widget interface via main CTA button click -->
-    <script>
-        function openAIAgent() {
-            const widget = document.querySelector('elevenlabs-convai');
-            if (widget && widget.shadowRoot) {
-                // Find and simulate a click on the internal floating button inside the widget element container
-                const actionButton = widget.shadowRoot.querySelector('button') || widget.shadowRoot.querySelector('.elevenlabs-convai-trigger');
-                if (actionButton) {
-                    actionButton.click();
-                    return;
-                }
-            }
-            // Fallback message notice if the widget element shadow state isn't rendered or fully active yet
-            alert("Please tap directly on the floating conversation widget button showing at the side of your window page!");
-        }
-    </script>
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">DALI · ZIGBEE · MATTER</span>
+        <h1>Wired reliability.<br>Wireless freedom.<br><em>One brand, unified.</em></h1>
+        <p class="lead">Illus engineers lighting drivers and control devices across three protocols — so every luminaire, retrofit, and smart-home platform gets the connection it actually needs.</p>
+        <div class="hero-ctas">
+          <a href="#matcher" class="btn btn-primary">Find your driver <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#ecosystems" class="btn btn-ghost">Explore ecosystems</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>40+</b><span>Drivers &amp; control devices</span></div>
+          <div class="stat"><b>3</b><span>Protocols, one ecosystem</span></div>
+          <div class="stat"><b>0–100%</b><span>Flicker-free dimming</span></div>
+        </div>
+      </div>
+      <div class="orbit-wrap" aria-hidden="true">
+        <svg viewBox="0 0 520 520">
+          <circle cx="260" cy="260" r="150" fill="none" stroke="#E2E8DE" stroke-width="1"/>
+          <circle cx="260" cy="260" r="98" fill="none" stroke="#E2E8DE" stroke-width="1"/>
+          <circle class="orbit-pulse" cx="260" cy="260" r="60" fill="#E7F3E9"/>
+          <circle cx="260" cy="260" r="46" fill="#2E6B4C"/>
+          <text x="260" y="255" text-anchor="middle" fill="#fff" font-family="Fraunces, serif" font-weight="600" font-size="20">ILLUS</text>
+          <text x="260" y="273" text-anchor="middle" fill="#BFE3C9" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1">SMART HUB</text>
+
+          <g class="orbit-ring">
+            <circle cx="260" cy="110" r="34" fill="#E7F3E9" stroke="#2E6B4C" stroke-width="1.4"/>
+            <circle cx="382" cy="335" r="34" fill="#F6EEDC" stroke="#AD7A28" stroke-width="1.4"/>
+            <circle cx="138" cy="335" r="34" fill="#E7EEF6" stroke="#3F6690" stroke-width="1.4"/>
+          </g>
+          <g transform="translate(260,110)"><text class="node-label" text-anchor="middle" y="5" fill="#2E6B4C">DALI</text></g>
+          <g transform="translate(382,335)"><text class="node-label" text-anchor="middle" y="5" fill="#AD7A28">ZIGBEE</text></g>
+          <g transform="translate(138,335)"><text class="node-label" text-anchor="middle" y="5" fill="#3F6690">MATTER</text></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRUST STRIP ================= -->
+  <div class="trust">
+    <div class="wrap trust-row">
+      <span class="trust-label">Works inside the platforms you already use</span>
+      <div class="trust-badges">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M9 7h6M9 11h6M9 15h3"/></svg>Apple Home</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 2.6 5.9"/><path d="M4 12h6M4 12l3-3M4 12l3 3"/></svg>Google Home</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V8a5 5 0 0 1 5-5Z"/><path d="M6 12a6 6 0 0 0 12 0M12 18v3"/></svg>Amazon Alexa</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Illus+ App</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= BENEFITS ================= -->
+  <section id="benefits">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Key benefits</span>
+        <h2>Premium lighting control, by design</h2>
+        <p>Every Illus driver — regardless of protocol — is built around the same six outcomes for the people living and working under the light.</p>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+          <h3>Energy saving</h3>
+          <p>Smart dimming and automated sensors activate lighting only when it's actually needed, cutting wasted power.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19v2M8.5 16.5a5 5 0 0 1 7 0M5.5 13.5a9.5 9.5 0 0 1 13 0M3 10.5a14 14 0 0 1 18 0"/></svg></div>
+          <h3>Wireless control</h3>
+          <p>Manage your entire lighting ecosystem remotely, from anywhere, via app or instant voice commands.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Smart automation</h3>
+          <p>Build schedules and sensor-based triggers that orchestrate lighting scenarios automatically, all day.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+          <h3>Smooth dimming</h3>
+          <p>Precise, flicker-free brightness adjustment from 0% to 100% — visual perfection at every level.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+          <h3>Universal compatibility</h3>
+          <p>Works seamlessly across Apple HomeKit, Google Assistant and Amazon Alexa, without platform limits.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6"/><path d="M18.5 4v4h-4M5.5 20v-4h4"/></svg></div>
+          <h3>Future ready</h3>
+          <p>A scalable architecture that lets your smart lighting ecosystem grow into future technologies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONNECTIVITY LANDSCAPE ================= -->
+  <section id="ecosystems" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The connectivity landscape</span>
+        <h2>Three protocols. One coherent choice.</h2>
+        <p>Pick DALI for uncompromised wired reliability, Zigbee for seamless wireless retrofitting, or Matter for universal integration — all engineered by Illus.</p>
+      </div>
+      <div class="eco-cards">
+        <div class="eco-card dali">
+          <span class="eco-tag">Wired</span>
+          <div>
+            <h3>DALI</h3>
+            <div class="eco-sub">The Robust Wired Standard</div>
+          </div>
+          <ul>
+            <li>Individual addressing — up to 64 addresses per line</li>
+            <li>Two-way communication &amp; diagnostics</li>
+            <li>0–100% flicker-free dimming</li>
+            <li>Commercial &amp; architectural focus</li>
+          </ul>
+          <a href="#products" class="go" data-goto="dali">View DALI products →</a>
+        </div>
+        <div class="eco-card zigbee">
+          <span class="eco-tag">Wireless mesh</span>
+          <div>
+            <h3>Zigbee</h3>
+            <div class="eco-sub">The Wireless Mesh</div>
+          </div>
+          <ul>
+            <li>Eliminates control wiring entirely</li>
+            <li>Highly reliable, self-healing mesh network</li>
+            <li>Direct app and voice control</li>
+            <li>Ideal for retrofits &amp; dynamic layouts</li>
+          </ul>
+          <a href="#products" class="go" data-goto="zigbee">View Zigbee products →</a>
+        </div>
+        <div class="eco-card matter">
+          <span class="eco-tag">Universal</span>
+          <div>
+            <h3>Matter</h3>
+            <div class="eco-sub">Universal Interoperability</div>
+          </div>
+          <ul>
+            <li>Unifies Apple, Google &amp; Amazon in one system</li>
+            <li>Platform-agnostic architecture</li>
+            <li>Highly secure, encrypted communication</li>
+            <li>Future-proof, unified smart home</li>
+          </ul>
+          <a href="#products" class="go" data-goto="matter">View Matter products →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCT DEEP DIVE ================= -->
+  <section id="products">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Product catalog</span>
+        <h2>Drivers and control devices, by ecosystem</h2>
+        <p>Every driver converts AC to regulated DC for your LEDs; every control device gives you a way to talk to it — a gateway, a dimmer, a button, a sensor.</p>
+      </div>
+
+      <div class="tabbar" role="tablist">
+        <button class="tabbtn active" data-eco="dali" role="tab" aria-selected="true"><span class="dot"></span>DALI</button>
+        <button class="tabbtn" data-eco="zigbee" role="tab" aria-selected="false"><span class="dot"></span>Zigbee</button>
+        <button class="tabbtn" data-eco="matter" role="tab" aria-selected="false"><span class="dot"></span>Matter</button>
+      </div>
+
+      <!-- DALI PANEL -->
+      <div class="tabpanel active" data-panel="dali">
+        <div class="eco-overview">
+          <div>
+            <p class="lede">DALI (Digital Addressable Lighting Interface) is a smart LED power supply that integrates power conversion with advanced digital control, enabling efficient and flexible lighting management.</p>
+            <p class="concept"><b>Core concept —</b> converts AC power into regulated DC for LEDs while supporting two-way digital communication with control systems, allowing precise, intelligent operation.</p>
+            <p class="concept"><b>Operation —</b> receives AC input → converts to stable DC output → processes DALI control signals → adjusts lighting (on/off, dimming, scenes).</p>
+          </div>
+          <ul class="feat-list">
+            <li><span class="k" style="background:var(--dali)"></span><div><b>Individual addressing</b>Up to 64 addresses per DALI line, each with a unique address</div></li>
+            <li><span class="k" style="background:var(--dali)"></span><div><b>Smooth dimming</b>Flicker-free dimming from 0–100%</div></li>
+            <li><span class="k" style="background:var(--dali)"></span><div><b>Two-way communication</b>Real-time status, diagnostics and energy feedback</div></li>
+            <li><span class="k" style="background:var(--dali)"></span><div><b>Scene &amp; group control</b>Flexible lighting scenes and synchronized group operation</div></li>
+          </ul>
+        </div>
+        <div class="cat-heading">Drivers — for luminaires</div>
+        <div class="prod-grid" data-catalog="dali-lum"></div>
+        <div class="cat-heading">Drivers — for LED strip</div>
+        <div class="prod-grid" data-catalog="dali-strip"></div>
+        <div class="cat-heading">Control devices</div>
+        <div class="prod-grid" data-catalog="dali-ctrl"></div>
+      </div>
+
+      <!-- ZIGBEE PANEL -->
+      <div class="tabpanel" data-panel="zigbee">
+        <div class="eco-overview">
+          <div>
+            <p class="lede">A Zigbee driver is a smart LED power supply with built-in wireless communication, enabling remote lighting control within smart-home systems without additional control wiring.</p>
+            <p class="concept"><b>Core concept —</b> converts AC power into regulated DC for LED operation while receiving wireless Zigbee commands to control on/off, dimming, and lighting scenes.</p>
+            <p class="concept"><b>Why it matters —</b> simplifies installation and offers greater flexibility than wired systems, while enabling full control via mobile apps and voice assistants.</p>
+          </div>
+          <ul class="feat-list">
+            <li><span class="k" style="background:var(--zigbee)"></span><div><b>Wireless control</b>No extra control wiring required</div></li>
+            <li><span class="k" style="background:var(--zigbee)"></span><div><b>Mesh networking</b>High reliability and extended coverage</div></li>
+            <li><span class="k" style="background:var(--zigbee)"></span><div><b>App control</b>Manage lighting via smartphone</div></li>
+            <li><span class="k" style="background:var(--zigbee)"></span><div><b>High compatibility</b>Works with major smart home systems via gateways</div></li>
+          </ul>
+        </div>
+        <div class="cat-heading">Drivers — for luminaires</div>
+        <div class="prod-grid" data-catalog="zigbee-lum"></div>
+        <div class="cat-heading">Drivers — for LED strip</div>
+        <div class="prod-grid" data-catalog="zigbee-strip"></div>
+      </div>
+
+      <!-- MATTER PANEL -->
+      <div class="tabpanel" data-panel="matter">
+        <div class="eco-overview">
+          <div>
+            <p class="lede">A Matter driver is a smart controller designed to power and control LED loads while supporting the Matter protocol, ensuring seamless compatibility across smart-home ecosystems without platform limitations.</p>
+            <p class="concept"><b>Core concept —</b> provides the required output for LED loads while receiving control commands via Matter (typically Wi-Fi or Thread) to manage on/off, dimming and scenes.</p>
+            <p class="concept"><b>Why it matters —</b> a unified experience — control lighting from any Matter-compatible app or platform, regardless of brand.</p>
+          </div>
+          <ul class="feat-list">
+            <li><span class="k" style="background:var(--matter)"></span><div><b>Universal compatibility</b>Works with Apple, Google, Amazon ecosystems</div></li>
+            <li><span class="k" style="background:var(--matter)"></span><div><b>Simplified setup</b>No need for multiple platforms</div></li>
+            <li><span class="k" style="background:var(--matter)"></span><div><b>Secure &amp; reliable</b>Encrypted, stable communication</div></li>
+            <li><span class="k" style="background:var(--matter)"></span><div><b>Automation ready</b>Supports scenes and scheduling</div></li>
+          </ul>
+        </div>
+        <div class="cat-heading">Driver — LED strip</div>
+        <div class="prod-grid" data-catalog="matter-strip"></div>
+        <div class="cat-heading">Devices used with Matter</div>
+        <div class="prod-grid" data-catalog="matter-ctrl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MATCHER ================= -->
+  <section id="matcher" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Driver matcher</span>
+        <h2>Tell us about your luminaire. We'll find the driver.</h2>
+        <p>Enter what you're powering and what matters most to your project — the matcher scans the full Illus catalog and suggests the closest fit, plus the control device to pair it with.</p>
+      </div>
+
+      <div class="matcher-shell">
+        <div class="matcher-grid">
+          <form class="matcher-form" id="matcherForm">
+            <div class="field">
+              <label>What are you powering?</label>
+              <div class="seg" id="segCategory">
+                <button type="button" class="active" data-val="lum">Luminaire / Downlight</button>
+                <button type="button" data-val="strip">LED Strip</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="wattInput">Wattage required</label>
+              <div class="num-field">
+                <input type="number" id="wattInput" min="1" max="400" step="1" placeholder="e.g. 24" inputmode="numeric">
+                <span>WATTS</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>What matters most?</label>
+              <div class="priority-list" id="priorityList">
+                <label class="priority-opt active">
+                  <input type="radio" name="priority" value="any" checked>
+                  <span><span class="p-title">Not sure — show me every ecosystem</span><span class="p-sub">Compare the best DALI, Zigbee and Matter match side by side</span></span>
+                </label>
+                <label class="priority-opt">
+                  <input type="radio" name="priority" value="dali">
+                  <span><span class="p-title">Rock-solid wired reliability</span><span class="p-sub">New construction, commercial or architectural projects</span></span>
+                </label>
+                <label class="priority-opt">
+                  <input type="radio" name="priority" value="zigbee">
+                  <span><span class="p-title">Easy wireless retrofit</span><span class="p-sub">No new control wiring, flexible layouts</span></span>
+                </label>
+                <label class="priority-opt">
+                  <input type="radio" name="priority" value="matter">
+                  <span><span class="p-title">Universal app compatibility</span><span class="p-sub">Must work across Apple, Google and Amazon</span></span>
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary matcher-submit">Find matching driver
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+          </form>
+
+          <div class="matcher-results" id="matcherResults">
+            <div class="mr-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              <h3 style="font-size:1.1rem;">Your matches will appear here</h3>
+              <p>Fill in the wattage and priority on the left, then run the matcher. We'll rank the closest-fit drivers from the catalog and suggest the control device to pair with each one.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPARISON TABLE ================= -->
+  <section id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Side-by-side</span>
+        <h2>DALI vs. Zigbee vs. Matter</h2>
+        <p>The same fundamentals, three different ways of getting there.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col" class="h-eco dali">DALI</th>
+              <th scope="col" class="h-eco zigbee">Zigbee</th>
+              <th scope="col" class="h-eco matter">Matter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Connection type</th><td>Wired bus, up to 64 addresses per line</td><td>Wireless, self-healing mesh</td><td>Wireless — Wi-Fi / Thread</td></tr>
+            <tr><th scope="row">Control wiring</th><td>Required (DALI bus)</td><td>Not required</td><td>Not required</td></tr>
+            <tr><th scope="row">Dimming range</th><td>0–100%, flicker-free</td><td>Smooth, app-controlled</td><td>Smooth, app-controlled</td></tr>
+            <tr><th scope="row">Control method</th><td>Bus commands, panels, sensors</td><td>App, voice, gateway</td><td>Any Matter-certified app or voice assistant</td></tr>
+            <tr><th scope="row">Platform reach</th><td>Via DALI gateway</td><td>Via Illus Hub / gateway</td><td>Native — Apple, Google, Amazon</td></tr>
+            <tr><th scope="row">Best suited for</th><td>Commercial &amp; architectural, new build</td><td>Retrofits, dynamic residential layouts</td><td>Multi-ecosystem homes, future-proofing</td></tr>
+            <tr><th scope="row">Diagnostics</th><td>Two-way, real-time status &amp; energy feedback</td><td>Via app / hub monitoring</td><td>Via app monitoring</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VOICE AGENT ================= -->
+  <section id="voice" class="alt">
+    <div class="wrap">
+      <div class="voice-card">
+        <div>
+          <div class="voice-eyebrow"><span class="pulse-dot"></span>Live voice assistant</div>
+          <h2>Talk it through with Ahmed, your AI lighting engineer.</h2>
+          <p>Describe your project out loud — luminaire wattage, retrofit constraints, which smart-home app you're on — and get a driver recommendation in real time, no forms required.</p>
+          <div class="voice-meta">
+            <div><b>Senior</b><span>Smart Lighting Sales Engineer</span></div>
+            <div><b>EN / AR</b><span>Bilingual support</span></div>
+            <div><b>KSA</b><span>Focused on Riyadh &amp; beyond</span></div>
+          </div>
+        </div>
+        <div class="voice-panel">
+          <div class="agent-row">
+            <div class="agent-avatar">A</div>
+            <div>
+              <div class="agent-name">Ahmed Mamdooh</div>
+              <div class="agent-role">Illus Lighting Engineer · AI Voice Agent</div>
+            </div>
+          </div>
+          <p class="voice-hint">Tap the assistant bubble in the corner of your screen to start speaking, or ask: <b>“What driver do I need for a 25W dimmable downlight on Zigbee?”</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <svg class="mark" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="15" stroke="#fff" stroke-width="1.6"/>
+            <circle cx="16" cy="16" r="4.6" fill="#fff"/>
+            <circle cx="16" cy="4.5" r="2.3" fill="#fff"/>
+            <circle cx="26.5" cy="21.7" r="2.3" fill="#BFE3C9"/>
+            <circle cx="5.5" cy="21.7" r="2.3" fill="#BFE3C9"/>
+          </svg>
+          Illus
+        </a>
+        <p>Smart DALI, Zigbee and Matter lighting drivers and control devices, engineered for luxury residential and commercial projects across Saudi Arabia.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-3a2 2 0 0 1 4 0v3M12 13v3"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#ecosystems">Ecosystems</a></li>
+          <li><a href="#products">Product catalog</a></li>
+          <li><a href="#matcher">Driver matcher</a></li>
+          <li><a href="#compare">Compare protocols</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ecosystems</h4>
+        <ul>
+          <li><a href="#products" data-goto="dali">DALI</a></li>
+          <li><a href="#products" data-goto="zigbee">Zigbee</a></li>
+          <li><a href="#products" data-goto="matter">Matter</a></li>
+          <li><a href="#voice">Ask an engineer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:8001222230">8001 222230</a></li>
+          <li><a href="mailto:customer-care@marketing-home.com">customer-care@marketing-home.com</a></li>
+          <li><a href="https://www.lightingstores.com.sa" target="_blank" rel="noopener">lightingstores.com.sa</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Illus Illumination. All rights reserved.</span>
+      <span>Riyadh, Saudi Arabia</span>
+    </div>
+  </div>
+</footer>
+
+<elevenlabs-convai agent-id="agent_5601kx8waw4pfy885txncnjxfrgv"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+<script>
+(function(){
+  // ---------- NAV TOGGLE ----------
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+  // ---------- CATALOG DATA ----------
+  var CATALOG = {
+    'dali-lum': [
+      {code:'LI615917',model:'ILS10DLIDD6W01',eco:'dali',cat:'lum',pmin:10,pmax:10,cur:'100–500mA',vin:'AC100–240V',vout:'DC3–42V'},
+      {code:'LI615920',model:'ILS15DLIDD6W01',eco:'dali',cat:'lum',pmin:15,pmax:15,cur:'100–700mA',vin:'AC100–240V',vout:'DC6–42V'},
+      {code:'LI615921',model:'ILS25DLIDD6W01',eco:'dali',cat:'lum',pmin:25,pmax:25,cur:'250–700mA',vin:'AC100–240V',vout:'DC6–54V'},
+      {code:'LI615922',model:'ILS36DLIDD6W01',eco:'dali',cat:'lum',pmin:36,pmax:36,cur:'350–1050mA',vin:'AC100–240V',vout:'DC6–54V'},
+      {code:'LI615923',model:'ILS45DLIDD6W01',eco:'dali',cat:'lum',pmin:45,pmax:45,cur:'500–1400mA',vin:'AC100–240V',vout:'DC6–54V'},
+      {code:'LI615924',model:'ILS65DLIDD6W01',eco:'dali',cat:'lum',pmin:65,pmax:65,cur:'500–1500mA',vin:'AC100–240V',vout:'DC6–54V'},
+      {code:'LI615208',model:'FLS-8-350 DALI-2 LD',eco:'dali',cat:'lum',pmin:5,pmax:9,cur:'120–350mA',vin:'AC220–240V',vout:'DC5–42V'},
+      {code:'LI615209',model:'FLS-12-350 DALI-2 LD',eco:'dali',cat:'lum',pmin:5,pmax:15,cur:'120–350mA',vin:'AC220–240V',vout:'DC9–42V'},
+      {code:'LI615210',model:'FLS-30-700 DALI2 LD ECO',eco:'dali',cat:'lum',pmin:6,pmax:30,cur:'150–700mA',vin:'AC220–240V',vout:'DC24–42V'},
+      {code:'LI615211',model:'FLS-44-1050 DALI2 LD ECO',eco:'dali',cat:'lum',pmin:30,pmax:44,cur:'700–1050mA',vin:'AC220–240V',vout:'DC24–42V'},
+      {code:'LI615212',model:'FLS-60-1400 DALI2 LA1',eco:'dali',cat:'lum',pmin:32,pmax:60,cur:'650–1400mA',vin:'AC220–240V',vout:'DC9–48V'},
+      {code:'LI615213',model:'IT DALI 15/220-240/350 CS',eco:'dali',cat:'lum',pmin:15,pmax:15,cur:'100–350mA',vin:'AC220–240V',vout:'DC9–42V'},
+      {code:'LI615214',model:'IT DALI 30/220-240/700 CS',eco:'dali',cat:'lum',pmin:30,pmax:30,cur:'350–700mA',vin:'AC220–240V',vout:'DC15–42V'},
+      {code:'LI615215',model:'IT DALI 42/220-240/1A0 CS',eco:'dali',cat:'lum',pmin:42,pmax:42,cur:'700–1050mA',vin:'AC220–240V',vout:'DC15–42V'}
+    ],
+    'dali-strip': [
+      {code:'LI615925',model:'ILS100DLISTD6W01',eco:'dali',cat:'strip',pmin:100,pmax:100,cur:'4.17A',vin:'AC100–240V',vout:'DC24V'},
+      {code:'LI615926',model:'ILS100DLISTD68W01',eco:'dali',cat:'strip',pmin:100,pmax:100,cur:'4.17A',vin:'AC100–240V',vout:'DC24V'},
+      {code:'LI615927',model:'ILS150DLISTD6W01',eco:'dali',cat:'strip',pmin:150,pmax:150,cur:'6.25A',vin:'AC100–240V',vout:'DC24V'},
+      {code:'LI615233',model:'LS-45-24-DALI2 LI',eco:'dali',cat:'strip',pmin:45,pmax:45,cur:'1.88A',vin:'AC220–240V',vout:'DC24V'},
+      {code:'LI615234',model:'LS-80-24-DALI2 LI',eco:'dali',cat:'strip',pmin:80,pmax:80,cur:'3.33A',vin:'AC220–240V',vout:'DC24V'}
+    ],
+    'dali-ctrl': [
+      {code:'LI615930',model:'DALI Gateway (AC)',eco:'dali',type:'Gateway',vin:'AC100–240V',vout:'—'},
+      {code:'LI615931',model:'DALI Gateway (DC)',eco:'dali',type:'Gateway',vin:'DC24V',vout:'—'},
+      {code:'LI615932',model:'DALI Gateway',eco:'dali',type:'Gateway',vin:'DC24V',vout:'—'},
+      {code:'LI615933',model:'DALI Relay (On/Off)',eco:'dali',type:'Relay',vin:'AC100–240V',vout:'AC100–240V'},
+      {code:'LI615934',model:'DALI Phase Cut Dimmer',eco:'dali',type:'Dimmer',vin:'AC100–240V',vout:'AC100–240V'},
+      {code:'LI615938',model:'DALI Dimmer',eco:'dali',type:'Dimmer',vin:'AC100–240V',vout:'AC100–240V'},
+      {code:'LI615935',model:'DALI-2 Push Button',eco:'dali',type:'Push button',vin:'DC16V',vout:'—'},
+      {code:'LI615936',model:'DALI-2 Push Button',eco:'dali',type:'Push button',vin:'DC16V',vout:'—'},
+      {code:'LI615937',model:'DALI-2 Push Button',eco:'dali',type:'Push button',vin:'DC16V',vout:'—'}
+    ],
+    'zigbee-lum': [
+      {code:'LI615947',model:'ILS10ZGDR01',eco:'zigbee',cat:'lum',pmin:10,pmax:10,cur:'100–500mA',vin:'AC100–240V',vout:'DC3–42V'},
+      {code:'LI615950',model:'ILS15ZGDR01',eco:'zigbee',cat:'lum',pmin:15,pmax:15,cur:'100–700mA',vin:'AC100–240V',vout:'DC6–42V'},
+      {code:'LI615952',model:'ILS25ZGDR02',eco:'zigbee',cat:'lum',pmin:25,pmax:25,cur:'250–700mA',vin:'AC100–240V',vout:'DC6–54V'},
+      {code:'LI615953',model:'ILS36ZGDR01',eco:'zigbee',cat:'lum',pmin:36,pmax:36,cur:'350–1050mA',vin:'AC100–240V',vout:'DC6–54V'},
+      {code:'LI615954',model:'ILS45ZGDR01',eco:'zigbee',cat:'lum',pmin:45,pmax:45,cur:'500–1400mA',vin:'AC100–240V',vout:'DC6–54V'},
+      {code:'LI615955',model:'ILS65ZGDR01',eco:'zigbee',cat:'lum',pmin:65,pmax:65,cur:'500–1500mA',vin:'AC100–240V',vout:'DC6–54V'}
+    ],
+    'zigbee-strip': [
+      {code:'LI615956',model:'ILS100ZGDSTR01',eco:'zigbee',cat:'strip',pmin:100,pmax:100,cur:'4.17A',vin:'AC100–240V',vout:'DC24V'},
+      {code:'LI615957',model:'ILS100ZGDSTR02',eco:'zigbee',cat:'strip',pmin:100,pmax:100,cur:'4.17A',vin:'AC100–240V',vout:'DC24V'},
+      {code:'LI615958',model:'ILS150ZGDSTR01',eco:'zigbee',cat:'strip',pmin:150,pmax:150,cur:'6.25A',vin:'AC100–240V',vout:'DC24V'}
+    ],
+    'matter-strip': [
+      {code:'LI615939',model:'ILSMTDD01',eco:'matter',cat:'strip',pmin:48,pmax:96,cur:'4A/CH',vin:'DC12–24V',vout:'DC12–24V'}
+    ],
+    'matter-ctrl': [
+      {code:'LI615940',model:'Matter Relay (On/Off)',eco:'matter',type:'Relay',vin:'AC100–240V',vout:'AC100–240V'},
+      {code:'LI615941',model:'Matter Phase Cut Dimming',eco:'matter',type:'Dimmer',vin:'AC100–240V',vout:'AC100–240V'},
+      {code:'LI615942',model:'Matter Relay (Curtain)',eco:'matter',type:'Relay',vin:'AC100–240V',vout:'AC100–240V'},
+      {code:'LI615943',model:'Matter Door Sensor',eco:'matter',type:'Sensor',vin:'3V lithium',vout:'—'},
+      {code:'LI615944',model:'Matter Push Button',eco:'matter',type:'Push button',vin:'3V lithium',vout:'—'},
+      {code:'LI615945',model:'Matter Push Button',eco:'matter',type:'Push button',vin:'3V lithium',vout:'—'},
+      {code:'LI615946',model:'Hub / Gateway',eco:'matter',type:'Gateway',vin:'DC24V',vout:'—'}
+    ]
+  };
+
+  var ECO_META = {
+    dali:{name:'DALI', accent:'var(--dali)'},
+    zigbee:{name:'Zigbee', accent:'var(--zigbee)'},
+    matter:{name:'Matter', accent:'var(--matter)'}
+  };
+
+  var ACCESSORY = {
+    dali: {name:'DALI Gateway', code:'LI615930', hint:'for app &amp; BMS control'},
+    zigbee: {name:'Illus Hub / Gateway', code:'LI615946', hint:'for app &amp; voice control'},
+    matter: {name:'Matter Relay + Hub / Gateway', code:'LI615940 · LI615946', hint:'for full ecosystem control'}
+  };
+
+  function fmtRange(min,max){ return min===max ? (min+'W') : (min+'–'+max+'W'); }
+
+  function renderCard(p){
+    var right = p.cat
+      ? '<div>'+fmtRange(p.pmin,p.pmax)+'</div><span>Power</span></div>' +
+        '<div><b>'+p.cur+'</b><span>Current</span></div>'
+      : '';
+    var specsHtml = '';
+    if(p.cat){
+      specsHtml = '<div><span>Power</span><b>'+fmtRange(p.pmin,p.pmax)+'</b></div>' +
+                  '<div><span>Current</span><b>'+p.cur+'</b></div>' +
+                  '<div><span>Input</span><b>'+p.vin+'</b></div>' +
+                  '<div><span>Output</span><b>'+p.vout+'</b></div>';
+    } else {
+      specsHtml = '<div><span>Type</span><b>'+p.type+'</b></div>' +
+                  '<div><span>Input</span><b>'+p.vin+'</b></div>' +
+                  '<div><span>Output</span><b>'+p.vout+'</b></div>';
+    }
+    return '<div class="prod-card">' +
+      '<div class="pc-top"><span class="pc-name">'+p.model+'</span><span class="pc-code">'+p.code+'</span></div>' +
+      '<div class="pc-specs">'+specsHtml+'</div>' +
+    '</div>';
+  }
+
+  Object.keys(CATALOG).forEach(function(key){
+    var el = document.querySelector('[data-catalog="'+key+'"]');
+    if(!el) return;
+    el.innerHTML = CATALOG[key].map(renderCard).join('');
+  });
+
+  // ---------- TABS ----------
+  var tabbtns = document.querySelectorAll('.tabbtn');
+  var panels = document.querySelectorAll('.tabpanel');
+  function activateTab(eco){
+    tabbtns.forEach(function(b){
+      var on = b.getAttribute('data-eco') === eco;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on);
+    });
+    panels.forEach(function(p){
+      p.classList.toggle('active', p.getAttribute('data-panel') === eco);
+    });
+  }
+  tabbtns.forEach(function(b){
+    b.addEventListener('click', function(){ activateTab(b.getAttribute('data-eco')); });
+  });
+  document.querySelectorAll('[data-goto]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var eco = a.getAttribute('data-goto');
+      setTimeout(function(){ activateTab(eco); }, 50);
+    });
+  });
+
+  // ---------- MATCHER ----------
+  var segCategory = document.getElementById('segCategory');
+  var categoryVal = 'lum';
+  segCategory.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click', function(){
+      segCategory.querySelectorAll('button').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      categoryVal = b.getAttribute('data-val');
+    });
+  });
+
+  document.querySelectorAll('.priority-opt').forEach(function(opt){
+    opt.addEventListener('click', function(){
+      document.querySelectorAll('.priority-opt').forEach(function(o){ o.classList.remove('active'); });
+      opt.classList.add('active');
+    });
+  });
+
+  function driverPool(category){
+    var pool = [];
+    ['dali','zigbee','matter'].forEach(function(eco){
+      var keys = category === 'lum' ? [eco+'-lum'] : [eco+'-strip'];
+      keys.forEach(function(k){
+        if(CATALOG[k]) pool = pool.concat(CATALOG[k]);
+      });
+    });
+    return pool;
+  }
+
+  function bestForEco(pool, eco, watt){
+    var candidates = pool.filter(function(p){ return p.eco === eco; });
+    if(!candidates.length) return null;
+    // score: prefer drivers whose range covers watt; else closest by distance
+    var scored = candidates.map(function(p){
+      var covers = watt >= p.pmin && watt <= p.pmax;
+      var dist = watt < p.pmin ? (p.pmin - watt) : (watt > p.pmax ? (watt - p.pmax) : 0);
+      var span = p.pmax - p.pmin;
+      return {p:p, covers:covers, dist:dist, span:span};
+    });
+    scored.sort(function(a,b){
+      if(a.covers !== b.covers) return a.covers ? -1 : 1;
+      if(a.dist !== b.dist) return a.dist - b.dist;
+      return a.span - b.span;
+    });
+    return scored[0];
+  }
+
+  function resultCardHtml(scored, eco){
+    var p = scored.p;
+    var meta = ECO_META[eco];
+    var acc = ACCESSORY[eco];
+    var fitLabel = scored.covers ? 'Direct match' : 'Closest available (' + (p.pmax < (p.pmin) ? '' : '') + (scored.dist) + 'W difference)';
+    return '<div class="result-card '+eco+'">' +
+      '<div class="result-top"><span class="result-eco">'+meta.name+'</span><span class="result-fit">'+fitLabel+'</span></div>' +
+      '<div class="result-name">'+p.model+'</div>' +
+      '<div class="result-code">Product code '+p.code+'</div>' +
+      '<div class="result-specs">' +
+        '<div><span>Power</span><b>'+fmtRange(p.pmin,p.pmax)+'</b></div>' +
+        '<div><span>Current</span><b>'+p.cur+'</b></div>' +
+        '<div><span>Input</span><b>'+p.vin+'</b></div>' +
+        '<div><span>Output</span><b>'+p.vout+'</b></div>' +
+      '</div>' +
+      '<div class="result-pair">Pair with: <b>'+acc.name+'</b> ('+acc.code+') '+acc.hint+'</div>' +
+    '</div>';
+  }
+
+  document.getElementById('matcherForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var watt = parseFloat(document.getElementById('wattInput').value);
+    var priority = document.querySelector('input[name="priority"]:checked').value;
+    var resultsEl = document.getElementById('matcherResults');
+
+    if(!watt || watt <= 0){
+      resultsEl.innerHTML = '<div class="mr-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg><h3 style="font-size:1.1rem;">Enter a wattage first</h3><p>Tell us the wattage your luminaire or LED strip requires, then run the matcher again.</p></div>';
+      return;
+    }
+
+    var pool = driverPool(categoryVal);
+    var ecosToShow = priority === 'any' ? ['dali','zigbee','matter'] : [priority];
+    // Matter driver only exists for strips in this catalog — skip gracefully if none for the category
+    var cards = [];
+    ecosToShow.forEach(function(eco){
+      var best = bestForEco(pool, eco, watt);
+      if(best) cards.push(resultCardHtml(best, eco));
+    });
+
+    if(!cards.length){
+      resultsEl.innerHTML = '<div class="mr-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg><h3 style="font-size:1.1rem;">No catalog driver for that combination yet</h3><p>Try switching to Luminaire or LED Strip, or talk to Ahmed for a custom recommendation.</p></div>';
+      return;
+    }
+
+    var heading = (priority === 'any')
+      ? '<h3 style="font-size:1.05rem; margin-bottom:16px;">Best match per ecosystem for a '+watt+'W '+(categoryVal==='lum'?'luminaire':'LED strip')+'</h3>'
+      : '<h3 style="font-size:1.05rem; margin-bottom:16px;">Top match for a '+watt+'W '+(categoryVal==='lum'?'luminaire':'LED strip')+'</h3>';
+
+    resultsEl.innerHTML = heading + cards.join('') +
+      '<p class="mr-note">Matches are ranked from the published Illus driver catalog by power rating. Always confirm exact dimming curve and load compatibility against the full datasheet before specifying — or ask Ahmed to double-check your project.</p>';
+  });
+
+})();
+</script>
 
 </body>
 </html>
