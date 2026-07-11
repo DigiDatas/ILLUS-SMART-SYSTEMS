@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illus | Smart Systems Simplified</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --bg-dark: #0F172A;
+            --text-light: #F8FAFC;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: white;
+        }
+
+        .brand span {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1E293B 0%, #0F172A 100%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #818CF8, #C084FC);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            color: #94A3B8;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-card p {
+            color: #94A3B8;
+        }
+
+        /* Help Text */
+        .help-text {
+            text-align: center;
+            margin: 3rem 0;
+            font-size: 1.2rem;
+            color: #E2E8F0;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">Illus<span>.</span></div>
+    </nav>
+
+    <section class="hero">
+        <h1>Smart Living, Demystified.</h1>
+        <p>Discover the future of automation with our DALI, Zigbee, and Matter systems. Complex technology made incredibly simple for your home or business.</p>
+        <button class="cta-button" onclick="alert('Click the calling agent widget in the bottom right to talk to our expert!')">Talk to our AI Expert</button>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>DALI Systems</h3>
+            <p>Professional-grade digital lighting control. We make setting up perfect commercial or high-end residential lighting effortless.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Zigbee Networks</h3>
+            <p>Reliable, low-power wireless mesh networks for your smart home. Connect sensors, lights, and switches without overloading your Wi-Fi.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Matter Standard</h3>
+            <p>The new universal language of smart homes. Buy any Matter device and know it will work seamlessly with your existing setup.</p>
+        </div>
+    </section>
+
+    <div class="help-text">
+        <p>Have questions? Don't know where to start? <br><strong>Tap the phone icon in the bottom right to call our AI Assistant!</strong></p>
+    </div>
+
+    <!-- ELEVENLABS CONVERSATIONAL AI WIDGET -->
+    <!-- Replace 'YOUR_AGENT_ID_HERE' with your actual Agent ID from the ElevenLabs Dashboard -->
+    <elevenlabs-convai agent-id="YOUR_AGENT_ID_HERE"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js"></script>
+
+</body>
+</html>
